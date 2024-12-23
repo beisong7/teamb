@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SSH_CRED = credentials('daad931a-8809-47f4-b0bc-ef4cb84487d8')
+        SSH_CRED = credentials('server-key')
         def CONNECT = 'ssh -o StrictHostKeyChecking=no ubuntu@3.99.174.54'
     }
     stages {
@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying app'
-                sshagent(['daad931a-8809-47f4-b0bc-ef4cb84487d8']) {
+                sshagent(['server-key']) {
                     sh 'scp -o StrictHostKeyChecking=no -i $SSH_CRED webapp.zip ubuntu@3.99.174.54:/home/ubuntu'
                     sh '$CONNECT "sudo apt install zip -y"'
                     sh '$CONNECT "sudo rm -rf /var/www/html/"'
