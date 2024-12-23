@@ -29,8 +29,6 @@ pipeline {
             }
         }
 
-
-
         stage('Clean-Up') {
             steps {
                 echo 'Remove existing files'
