@@ -36,4 +36,11 @@ pipeline {
             }
         }
     }
+    post {
+        failure {
+            echo 'Build failed. Cleaning up workspace...'
+            cleanWs()
+        }
+    }
+    
 }
